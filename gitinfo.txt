@@ -1,0 +1,5 @@
+1-enter folder
+2- git clone (url)
+3-cd (name folder)
+4- git add *
+5 git commit -m ''
