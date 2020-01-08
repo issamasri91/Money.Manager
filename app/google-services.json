@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "136967429061",
+    "firebase_url": "https://money-manager-ad063.firebaseio.com",
+    "project_id": "money-manager-ad063",
+    "storage_bucket": "money-manager-ad063.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136967429061:android:9887f1301b33fa1d36c9ac",
+        "android_client_info": {
+          "package_name": "com.issamelasri.moneymanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136967429061-7dpojjngfcn2m965hudc6mdroe4pv3s5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD66eohkWZ_TMHiz1P0SghjubWhHlNPwQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136967429061-7dpojjngfcn2m965hudc6mdroe4pv3s5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
