@@ -1,12 +1,17 @@
 package com.issamelasri.moneymanager;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class SignActivity extends AppCompatActivity
-{
+
+
+
+public class LoginActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
