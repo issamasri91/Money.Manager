@@ -26,6 +26,8 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-
+    <string name="button_drawer">go to home</string>
+    <string name="username">username</string>
+    <string name="button_next">buttonNext</string>
 
 </resources>
