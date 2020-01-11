@@ -6,16 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="@string/btn_singout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -31,19 +22,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="326dp" />
 
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="112dp"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/username"
-        android:scrollbarSize="16dp"
-        android:text="@string/username"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
 
     <Button
         android:id="@+id/buttonToDraw"

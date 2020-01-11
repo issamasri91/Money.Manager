@@ -14,9 +14,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView name;
-    private Button signOut;
-  //  public ImageView imageView;
+    public TextView name;
+    public Button signOut;
+
 
 
     @Override
@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         name = findViewById(R.id.userName);
         signOut = findViewById(R.id.logout);
-     //   imageView = findViewById(R.id.imageView);
-
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             name.setText("hello" + user.getDisplayName() + ",");
-           // imageView.setImageURI(user.getPhotoUrl());
         }
 
     }
     public void btnNext(View v){
         Intent intent = new Intent(MainActivity.this, Main2Activity.class);
         startActivity(intent);
+
     }
 }
