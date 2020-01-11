@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -13,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private TextView name;
     private Button signOut;
+  //  public ImageView imageView;
 
 
     @Override
@@ -22,18 +25,22 @@ public class MainActivity extends AppCompatActivity {
 
         name = findViewById(R.id.userName);
         signOut = findViewById(R.id.logout);
+     //   imageView = findViewById(R.id.imageView);
 
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 finish();
+                Toast.makeText(MainActivity.this, "sign out", Toast.LENGTH_LONG).show();
 
             }
         });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user !=null){
-            name.setText("hello"+user.getDisplayName()+",");
+        if (user != null) {
+            name.setText("hello" + user.getDisplayName() + ",");
+           // imageView.setImageURI(user.getPhotoUrl());
         }
+
     }
 }
