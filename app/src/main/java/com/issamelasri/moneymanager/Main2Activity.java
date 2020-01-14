@@ -43,9 +43,9 @@ public class Main2Activity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         //i call here username to nav-header
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.userName2);
-        TextView navUsermail = (TextView) headerView.findViewById(R.id.textViewUser);
-        ImageView navPicture = (ImageView)  headerView.findViewById(R.id.PictureProfile);
+        TextView navUsername = headerView.findViewById(R.id.userName2);
+        TextView navUsermail = headerView.findViewById(R.id.textViewUser);
+        ImageView navPicture = headerView.findViewById(R.id.PictureProfile);
         Bundle b=getIntent().getExtras();
         assert b != null;
         String username=b.getString("username");
