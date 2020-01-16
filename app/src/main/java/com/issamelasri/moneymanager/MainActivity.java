@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
             name.setText(user.getDisplayName());
             mail.setText(user.getEmail());
+
             try {
                 String PhotoUrl = user.getPhotoUrl().toString();
                 Picasso.get().load(PhotoUrl).into(imageAvatar);
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putString("username",name.getText().toString());
         b.putString("usermail",mail.getText().toString());
-        b.putString("picture",imageAvatar.getDrawable().toString());
         intent.putExtras(b);
         startActivity(intent);
     }

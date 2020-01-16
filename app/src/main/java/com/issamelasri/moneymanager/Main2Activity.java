@@ -1,11 +1,6 @@
 package com.issamelasri.moneymanager;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.navigation.NavController;
@@ -13,6 +8,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,9 +18,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.Objects;
 
 
 public class Main2Activity extends AppCompatActivity {
+
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -31,9 +31,6 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-
-
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -41,21 +38,25 @@ public class Main2Activity extends AppCompatActivity {
                 .setAction("Action", null).show());
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //i call here username to nav-header
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = headerView.findViewById(R.id.userName2);
-        TextView navUsermail = headerView.findViewById(R.id.textViewUser);
-        ImageView navPicture = headerView.findViewById(R.id.PictureProfile);
-        Bundle b=getIntent().getExtras();
-        assert b != null;
-        String username=b.getString("username");
-        String usermail=b.getString("usermail");
-        String userPicture=b.getString("picture");
-        navUsername.setText(username);
-        navUsermail.setText(usermail);
-        navPicture.setImageDrawable(Drawable.createFromPath(userPicture));
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        TextView username=headerView.findViewById(R.id.userName2);
+        assert user != null;
+        username.setText(user.getDisplayName());
+        TextView useremail=headerView.findViewById(R.id.textViewUser);
+        useremail.setText(user.getEmail());
+        ImageView imageprofile=headerView.findViewById(R.id.PictureProfile);
+        try {
+            String PhotoUrl = Objects.requireNonNull(user.getPhotoUrl()).toString();
+            Picasso.get().load(PhotoUrl).into(imageprofile);
+
+        }catch (Exception ignored){
+
+
+        }
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)

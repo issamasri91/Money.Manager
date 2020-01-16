@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             //     Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
-                            Toast.makeText(LoginActivity.this, "auth failed", Toast.LENGTH_SHORT);
+                            Toast.makeText(LoginActivity.this, "auth failed", Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
 
@@ -126,9 +126,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, Main2Activity.class);
             startActivity(intent);
             finish();
         }
     }
+
 }
