@@ -2,6 +2,7 @@ package com.issamelasri.moneymanager;
 
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.shape.RoundedCornerTreatment;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,6 +12,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -50,7 +53,10 @@ public class Main2Activity extends AppCompatActivity {
         ImageView imageprofile=headerView.findViewById(R.id.PictureProfile);
         try {
             String PhotoUrl = Objects.requireNonNull(user.getPhotoUrl()).toString();
-            Picasso.get().load(PhotoUrl).into(imageprofile);
+            Picasso.get()
+                    .load(PhotoUrl)
+                    .into(imageprofile);
+
 
         }catch (Exception ignored){
 
