@@ -1,26 +1,33 @@
 package com.issamelasri.moneymanager;
 
+import android.app.DatePickerDialog;
+import android.content.ClipData;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.shape.RoundedCornerTreatment;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import android.view.Menu;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -29,19 +36,31 @@ public class Main2Activity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    TextView click_me;
+    String monthYearStr;
+
+    SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
+    SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
+
+
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //i call here username to nav-header
         View headerView = navigationView.getHeaderView(0);
@@ -64,14 +83,37 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_home,
+                R.id.nav_gallery,
+                R.id.nav_slideshow,
+                R.id.nav_tools,
+                R.id.nav_share,
+                R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        click_me = findViewById(R.id.click_me);
 
+        click_me.setOnClickListener(v -> {
+            PickerMonth pickerDialog = new PickerMonth();
+            pickerDialog.setListener((datePicker, year, month, i2) -> {
+                monthYearStr = year + "-" + (month + 1) + "-" + i2;
+                click_me.setText(formatMonthYear(monthYearStr));
+            });
+            pickerDialog.show(getSupportFragmentManager(), "MonthYearPickerDialog");
+        });
+    }
+
+    String formatMonthYear(String str) {
+        Date date = null;
+        try {
+            date = input.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return sdf.format(date);
 
     }
 
@@ -80,6 +122,8 @@ public class Main2Activity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main2, menu);
         return true;
+
+
     }
 
     @Override
@@ -91,5 +135,6 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
-}
 
+
+}

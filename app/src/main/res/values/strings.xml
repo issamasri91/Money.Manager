@@ -29,5 +29,9 @@
     <string name="button_drawer">go to home</string>
     <string name="username">username</string>
     <string name="button_next">buttonNext</string>
+    <string name="cancel">cancel</string>
+    <string name="ok">ok</string>
+    <string name="Click_Me">Click Me</string>
 
+    <string name="get_month">Get Month</string>
 </resources>
