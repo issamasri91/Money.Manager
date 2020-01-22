@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/btn_singout"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_action_io"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_two"
+        android:orderInCategory="80"
+        android:title="hello"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/item2"
+        android:title="@string/Click_Me">
+
+
+    </item>
+
+
 </menu>

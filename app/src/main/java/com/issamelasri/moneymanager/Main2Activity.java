@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -14,17 +14,21 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Main2Activity extends AppCompatActivity {
@@ -60,17 +64,15 @@ public class Main2Activity extends AppCompatActivity {
         username.setText(user.getDisplayName());
         TextView useremail=headerView.findViewById(R.id.textViewUser);
         useremail.setText(user.getEmail());
-        ImageView imageprofile=headerView.findViewById(R.id.PictureProfile);
+        CircleImageView imageprofile = headerView.findViewById(R.id.PictureProfile);
         try {
             String PhotoUrl = Objects.requireNonNull(user.getPhotoUrl()).toString();
             Picasso.get()
                     .load(PhotoUrl)
+                    .fit()
+                    .noFade()
                     .into(imageprofile);
-
-
         }catch (Exception ignored){
-
-
         }
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
