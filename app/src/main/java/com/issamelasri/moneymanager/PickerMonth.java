@@ -3,7 +3,6 @@ package com.issamelasri.moneymanager;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
-
 
 
 public class PickerMonth extends DialogFragment {
@@ -34,8 +32,8 @@ public class PickerMonth extends DialogFragment {
         Calendar cal = Calendar.getInstance();
 
         View dialog = inflater.inflate(R.layout.activity_picker_month, null);
-        final NumberPicker monthPicker =  dialog.findViewById(R.id.picker_month);
-        final NumberPicker yearPicker =  dialog.findViewById(R.id.picker_year);
+        final NumberPicker monthPicker = dialog.findViewById(R.id.picker_month);
+        final NumberPicker yearPicker = dialog.findViewById(R.id.picker_year);
 
         monthPicker.setMinValue(1);
         monthPicker.setMaxValue(12);

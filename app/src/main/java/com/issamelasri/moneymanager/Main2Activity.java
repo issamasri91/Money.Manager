@@ -1,6 +1,7 @@
 package com.issamelasri.moneymanager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -33,36 +39,61 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Main2Activity extends AppCompatActivity {
 
-
-    private AppBarConfiguration mAppBarConfiguration;
+    private static final String TAG = "Main2Activity";
     long time;
     TextView click_me;
     String monthYearStr;
-
     SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
     SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-
+    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                click_me.setText(value);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        fab.setOnClickListener(view -> {
+            myRef.setValue(click_me.getText().toString());
+            Snackbar.make(view, "Saved data", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        });
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //i call here username to nav-header
         View headerView = navigationView.getHeaderView(0);
-        TextView username=headerView.findViewById(R.id.userName2);
+        TextView username = headerView.findViewById(R.id.userName2);
         assert user != null;
         username.setText(user.getDisplayName());
-        TextView useremail=headerView.findViewById(R.id.textViewUser);
+        TextView useremail = headerView.findViewById(R.id.textViewUser);
         useremail.setText(user.getEmail());
         CircleImageView imageprofile = headerView.findViewById(R.id.PictureProfile);
         try {
@@ -72,7 +103,7 @@ public class Main2Activity extends AppCompatActivity {
                     .fit()
                     .noFade()
                     .into(imageprofile);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
         }
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -88,15 +119,19 @@ public class Main2Activity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
         click_me = findViewById(R.id.click_me);
         click_me.setOnClickListener(v -> {
             PickerMonth pickerDialog = new PickerMonth();
             pickerDialog.setListener((datePicker, year, month, i2) -> {
                 monthYearStr = year + "-" + (month + 1) + "-" + i2;
                 click_me.setText(formatMonthYear(monthYearStr));
+
             });
             pickerDialog.show(getSupportFragmentManager(), "MonthYearPickerDialog");
+
         });
+
     }
 
     String formatMonthYear(String str) {
@@ -116,22 +151,22 @@ public class Main2Activity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main2, menu);
         return true;
-
-
-
     }
-@Override
-public boolean onOptionsItemSelected(MenuItem item){
-    int id = item.getItemId();
 
-    if (id == R.id.action_settings) {
-        super.onBackPressed();
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            super.onBackPressed();
             Toast.makeText(Main2Activity.this, "sign out", Toast.LENGTH_LONG).show();
+            return true;
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
 
-        return true;
-    }return super.onOptionsItemSelected(item);
-}
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -142,12 +177,14 @@ public boolean onOptionsItemSelected(MenuItem item){
     }
 
     @Override
-    public void onBackPressed(){
-        if (time+ 2000 > System.currentTimeMillis()){
+    public void onBackPressed() {
+        if (time + 2000 > System.currentTimeMillis()) {
             super.onBackPressed();
-        }else {
-            Toast.makeText(Main2Activity.this,"Press to exit",Toast.LENGTH_SHORT).show();
-        }time=System.currentTimeMillis();
+        } else {
+            Toast.makeText(Main2Activity.this, "Press to exit", Toast.LENGTH_SHORT).show();
+        }
+        time = System.currentTimeMillis();
     }
+
 
 }

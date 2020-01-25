@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 
 public class NavagationHeader extends AppCompatActivity {
 
@@ -18,11 +17,9 @@ public class NavagationHeader extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_header_main2);
         usern = findViewById(R.id.textViewUser);
- FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
- if (user != null)
-    usern.setText(user.getDisplayName());
-
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null)
+            usern.setText(user.getDisplayName());
 
 
     }

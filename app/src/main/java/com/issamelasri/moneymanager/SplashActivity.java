@@ -1,9 +1,9 @@
 package com.issamelasri.moneymanager;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -11,9 +11,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Thread thread = new Thread(){
+        Thread thread = new Thread() {
             @Override
-            public void run(){
+            public void run() {
                 try {
                     sleep(4000);
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -23,7 +23,6 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
 
 
         };

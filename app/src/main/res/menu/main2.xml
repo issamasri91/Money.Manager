@@ -8,18 +8,9 @@
         android:orderInCategory="100"
         android:title="@string/btn_singout"
         android:icon="@drawable/ic_action_io"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_two"
-        android:orderInCategory="80"
-        android:title="hello"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/item2"
-        android:title="@string/Click_Me">
+        app:showAsAction="never" />
 
 
-    </item>
 
 
 </menu>
