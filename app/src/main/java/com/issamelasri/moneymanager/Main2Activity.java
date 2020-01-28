@@ -1,7 +1,7 @@
 package com.issamelasri.moneymanager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,11 +21,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -39,7 +34,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Main2Activity extends AppCompatActivity {
 
-    private static final String TAG = "Main2Activity";
     long time;
     TextView click_me;
     String monthYearStr;
@@ -52,34 +46,12 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                click_me.setText(value);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-            myRef.setValue(click_me.getText().toString());
+
             Snackbar.make(view, "Saved data", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         });
@@ -186,5 +158,26 @@ public class Main2Activity extends AppCompatActivity {
         time = System.currentTimeMillis();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences sh
+                = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        String s1 = sh.getString("date", "");
+        click_me.setText(s1);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences
+                = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor myEdit
+                = sharedPreferences.edit();
+        myEdit.putString("date", click_me.getText().toString());
+        myEdit.apply();
+    }
 
 }
