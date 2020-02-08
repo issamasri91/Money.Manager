@@ -17,9 +17,9 @@
         android:id="@+id/PictureProfile"
         android:layout_width="66dp"
         android:layout_height="66dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/ic_piggy"
         app:civ_border_color="#FF000000"
-        app:civ_border_width="1dp" />
+        app:civ_border_width="0.5dp" />
 
     <TextView
         android:id="@+id/userName2"

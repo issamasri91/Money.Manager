@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "136967429061-v184dh0f5rdl6mplel3q0g5d8me2ccce.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.issamelasri.moneymanager",
+            "certificate_hash": "51331ff97648a8090fbbd7eaf81fd0160cb9ab41"
+          }
+        },
+        {
+          "client_id": "136967429061-oj37d9kjsshtv5502tmg0ee3ue5ovttg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.issamelasri.moneymanager",
+            "certificate_hash": "6f32a081ef7f233a39fdaf267007b558976a5891"
+          }
+        },
+        {
           "client_id": "136967429061-7dpojjngfcn2m965hudc6mdroe4pv3s5.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -28,7 +44,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "136967429061-7dpojjngfcn2m965hudc6mdroe4pv3s5.apps.googleusercontent.com",
+              "client_id": "136967429061-3s3r94spsk3bh5qeoo8795iejn9gh07v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
