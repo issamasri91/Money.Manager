@@ -1,6 +1,7 @@
 package com.issamelasri.moneymanager;
 
-import android.content.SharedPreferences;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,15 +19,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,28 +31,23 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Main2Activity extends AppCompatActivity {
 
     long time;
-    TextView click_me;
-    String monthYearStr;
-    SimpleDateFormat sdf = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
-    SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private AppBarConfiguration mAppBarConfiguration;
-
+    int date;
+    int amount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
+        Intent intentTwo = getIntent();
+        date = intentTwo.getIntExtra(AddActivity.DATE_TEXT, 0);
+        amount = intentTwo.getIntExtra(AddActivity.AMOUNT_TEXT, 0);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-
-            Snackbar.make(view, "Saved data", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            openAddActivity();
         });
-
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -80,9 +71,6 @@ public class Main2Activity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home,
-                R.id.nav_gallery,
-                R.id.nav_slideshow,
-                R.id.nav_tools,
                 R.id.nav_share,
                 R.id.nav_send)
                 .setDrawerLayout(drawer)
@@ -90,31 +78,6 @@ public class Main2Activity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-
-        click_me = findViewById(R.id.click_me);
-        click_me.setOnClickListener(v -> {
-            PickerMonth pickerDialog = new PickerMonth();
-            pickerDialog.setListener((datePicker, year, month, i2) -> {
-                monthYearStr = year + "-" + (month + 1) + "-" + i2;
-                click_me.setText(formatMonthYear(monthYearStr));
-
-            });
-            pickerDialog.show(getSupportFragmentManager(), "MonthYearPickerDialog");
-
-        });
-
-    }
-
-    String formatMonthYear(String str) {
-        Date date = null;
-        try {
-            date = input.parse(str);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        assert date != null;
-        return sdf.format(date);
 
     }
 
@@ -124,8 +87,6 @@ public class Main2Activity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -138,7 +99,6 @@ public class Main2Activity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -147,7 +107,6 @@ public class Main2Activity extends AppCompatActivity {
 
 
     }
-
     @Override
     public void onBackPressed() {
         if (time + 2000 > System.currentTimeMillis()) {
@@ -158,26 +117,8 @@ public class Main2Activity extends AppCompatActivity {
         time = System.currentTimeMillis();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        SharedPreferences sh
-                = getSharedPreferences("MySharedPref", MODE_PRIVATE);
-        String s1 = sh.getString("date", "");
-        click_me.setText(s1);
-
+    public void openAddActivity() {
+        Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences sharedPreferences
-                = getSharedPreferences("MySharedPref", MODE_PRIVATE);
-        SharedPreferences.Editor myEdit
-                = sharedPreferences.edit();
-        myEdit.putString("date", click_me.getText().toString());
-        myEdit.apply();
-    }
-
 }

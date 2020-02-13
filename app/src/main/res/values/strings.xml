@@ -33,4 +33,9 @@
     <string name="ok">OK</string>
     <string name="Click_Me">Click Me</string>
     <string name="get_month">Get Month</string>
+
+    <string-array name="transaction">
+        <item>Income</item>
+        <item>Expenses</item>
+    </string-array>
 </resources>
