@@ -10,6 +10,10 @@
         android:name="com.issamelasri.moneymanager.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
+    <activity
+        android:id="@+id/nav_show"
+        android:name="com.issamelasri.moneymanager.ui.dashboard.Main3Activity"
+        tools:layout="@layout/activity_main3" />
 
     <fragment
         android:id="@+id/nav_share"

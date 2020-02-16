@@ -28,26 +28,22 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity implements ExamplDialog.ExamplDialogListener {
 
     long time;
     private AppBarConfiguration mAppBarConfiguration;
-    int date;
-    int amount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Intent intentTwo = getIntent();
-        date = intentTwo.getIntExtra(AddActivity.DATE_TEXT, 0);
-        amount = intentTwo.getIntExtra(AddActivity.AMOUNT_TEXT, 0);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            openAddActivity();
-        });
+        fab.setOnClickListener(view -> openAddActivity());
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -70,6 +66,7 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_show,
                 R.id.nav_home,
                 R.id.nav_share,
                 R.id.nav_send)
@@ -81,12 +78,23 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
+    public void openDialog() {
+        ExamplDialog examplDialog = new ExamplDialog();
+        examplDialog.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    @Override
+    public void applyTexte(String username, String password) {
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -99,6 +107,7 @@ public class Main2Activity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -107,6 +116,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
     }
+
     @Override
     public void onBackPressed() {
         if (time + 2000 > System.currentTimeMillis()) {

@@ -12,14 +12,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.issamelasri.moneymanager.ui.dashboard.Main3Activity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
-    public static final String AMOUNT_TEXT = "com.issamelasri.moneymanager.AMOUNT_TEXT";
-    public static final String DATE_TEXT = "com.issamelasri.moneymanager.DATE_TEXT";
-
     @BindView(R.id.textAmount)
     EditText textAmount;
     @BindView(R.id.spinner)
@@ -45,15 +43,31 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
     }
 
     public void openHomeFragment() {
-
-        int amount = Integer.parseInt(textAmount.getText().toString());
-        int date = Integer.parseInt(textDate.getText().toString());
-        Intent intentTwo = new Intent(this, Main2Activity.class);
-        intentTwo.putExtra("AMOUNT_TEXT", amount);
-        intentTwo.putExtra("DATE_TEXT", date);
-        startActivity(intentTwo);
+        Intent i = new Intent(this, Main3Activity.class);
+        i.putExtra("amount", textAmount.getText().toString());
+        i.putExtra("date", textDate.getText().toString());
+        Bundle mBundle = new Bundle();
+        if (validateFields()) {
+            // Then Submit
+            mBundle.putString("amount", textAmount.getText().toString());
+            mBundle.putString("date", textDate.getText().toString());
+            i.putExtras(mBundle);
+            startActivity(i);
+        }
     }
 
+    private boolean validateFields() {
+        int yourDesiredLength = 1;
+        if (textDate.getText().length() < yourDesiredLength) {
+            textDate.setError("Your Input is Invalid");
+            return false;
+        } else if (textAmount.getText().length() < yourDesiredLength) {
+            textAmount.setError("Your Input is Invalid");
+            return false;
+        } else {
+            return true;
+        }
+    }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
