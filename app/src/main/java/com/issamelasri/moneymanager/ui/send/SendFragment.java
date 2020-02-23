@@ -25,7 +25,7 @@ public class SendFragment extends Fragment {
                 ViewModelProviders.of(this).get(SendViewModel.class);
         View root = inflater.inflate(R.layout.fragment_send, container, false);
         final TextView textView = root.findViewById(R.id.text_send);
-        sendViewModel.getText().observe(this, s -> textView.setText(s));
+        sendViewModel.getText().observe(this, textView::setText);
         return root;
     }
 }

@@ -3,13 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
-
+    app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
         android:name="com.issamelasri.moneymanager.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
+
+    <activity
+        android:id="@+id/act_home"
+        android:name="com.issamelasri.moneymanager.ui.dashboard.HomeActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_home" />
     <activity
         android:id="@+id/nav_show"
         android:name="com.issamelasri.moneymanager.ui.dashboard.Main3Activity"

@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.issamelasri.moneymanager.ui.main.Main2Activity;
 
 
 public class LoginActivity extends AppCompatActivity {

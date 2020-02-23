@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.issamelasri.moneymanager.ui.main.Main2Activity;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {

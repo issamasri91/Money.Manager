@@ -26,21 +26,26 @@ public class Main3Activity extends AppCompatActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setTitle("Dashboard");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        infoThree();
+
+
+    }
+
+    public void infoThree() {
         Bundle extras = getIntent().getExtras();
         String userName;
         String pass;
         String spinner;
-
         if (extras != null) {
             userName = extras.getString("amount");
             textView1.setText(userName);
             pass = extras.getString("date");
             textView2.setText(pass);
-            spinner = extras.getString("spinner");
+            spinner = extras.getString("type");
             textView3.setText(spinner);
-
             // and get whatever type user account id is
         }
 
     }
+
 }
