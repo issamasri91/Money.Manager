@@ -11,11 +11,6 @@
         tools:layout="@layout/fragment_home" />
 
     <activity
-        android:id="@+id/act_home"
-        android:name="com.issamelasri.moneymanager.ui.dashboard.HomeActivity"
-        android:label="Home"
-        tools:layout="@layout/activity_home" />
-    <activity
         android:id="@+id/nav_show"
         android:name="com.issamelasri.moneymanager.ui.dashboard.Main3Activity"
         tools:layout="@layout/activity_main3" />

@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.issamelasri.moneymanager.ui.dashboard.Main3Activity;
+import com.issamelasri.moneymanager.ui.main.Main2Activity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,8 +42,7 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         ButterKnife.bind(this);
-        getSupportActionBar().setTitle("Add transaction");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar();
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.transaction, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -53,10 +52,7 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
     }
 
     public void openHomeFragment() {
-        Intent i = new Intent(this, Main3Activity.class);
-        i.putExtra("amount", textAmount.getText().toString());
-        i.putExtra("date", textDate.getText().toString());
-        i.putExtra("type", type);
+        Intent i = new Intent(this, Main2Activity.class);
         Bundle mBundle = new Bundle();
         if (validateFields()) {
             // Then Submit
@@ -105,5 +101,17 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         String string = "Select type of transaction";
         Toast.makeText(parent.getContext(), string, Toast.LENGTH_SHORT).show();
 
+    }
+
+    public TextInputEditText getTextDate() {
+        return textDate;
+    }
+
+    public TextInputEditText getTextAmount() {
+        return textAmount;
+    }
+
+    public String getType() {
+        return type;
     }
 }
