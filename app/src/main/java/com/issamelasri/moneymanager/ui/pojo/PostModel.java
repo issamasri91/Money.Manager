@@ -1,57 +1,39 @@
 package com.issamelasri.moneymanager.ui.pojo;
 
-import com.issamelasri.moneymanager.AddActivity;
+import java.io.Serializable;
 
-public class PostModel {
-    AddActivity addActivity = new AddActivity();
-    private int userId;
-    private int id;
-    private String title;
-    private String body;
-    private int incomes, expenses;
+public class PostModel implements Serializable {
+    private String date;
+    private int amount;
+    private String type;
 
-    public int getUserId() {
-        return userId;
+    public PostModel(String date, int amount, String type) {
+        this.date = date;
+        this.amount = amount;
+        this.type = type;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public String getDate() {
+        return date;
     }
 
-    public int getId() {
-        return id;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getAmount() {
+        return amount;
     }
 
-    public String getTitle() {
-        return title;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getType() {
+        return type;
     }
 
-    public String getBody() {
-        return body;
+    public void setType(String type) {
+        this.type = type;
     }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public int getIncomes() {
-        incomes = Integer.parseInt(addActivity.getTextAmount().toString());
-
-        return incomes;
-    }
-
-    public int getExpenses() {
-        expenses = Integer.parseInt(addActivity.getType());
-        return expenses;
-    }
-
-
 }

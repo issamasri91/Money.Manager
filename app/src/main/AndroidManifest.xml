@@ -17,7 +17,7 @@
             android:name=".ui.dashboard.Main3Activity"
             android:parentActivityName=".ui.main.Main2Activity" />
         <activity
-            android:name=".AddActivity"
+            android:name=".ui.home.AddActivity"
             android:parentActivityName=".ui.main.Main2Activity" />
         <activity
             android:name=".ui.main.Main2Activity"

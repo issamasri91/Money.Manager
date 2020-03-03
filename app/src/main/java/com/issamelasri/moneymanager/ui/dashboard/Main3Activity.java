@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.issamelasri.moneymanager.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,30 +45,13 @@ public class Main3Activity extends AppCompatActivity {
                 piechart();
             }
         });
-
     }
 
     public ArrayList<PieEntry> datavals() {
-        try {
-            if (text1 != null) {
-                String value = text1.getText().toString();
-                one = Integer.parseInt(value);
-            }
-            if (text2 != null) {
-                String valuetwo = text2.getText().toString();
-                two = Integer.parseInt(valuetwo);
-            }
-
-            three = one - two;
-
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
 
         ArrayList<PieEntry> vals = new ArrayList<>();
-        vals.add(new PieEntry(one, "incomes"));
-        vals.add(new PieEntry(two, "Expenses"));
-        vals.add(new PieEntry(three, "Rest"));
+        vals.add(new PieEntry(one = Integer.parseInt(Objects.requireNonNull(text1.getText()).toString()), "incomes"));
+        vals.add(new PieEntry(two = Integer.parseInt(Objects.requireNonNull(text2.getText()).toString()), "Expenses"));
         return vals;
     }
 

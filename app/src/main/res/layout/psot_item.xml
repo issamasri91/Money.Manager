@@ -1,37 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
 
     <TextView
-        android:id="@+id/titleText"
-        android:layout_width="130dp"
-        android:layout_height="43dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/idText"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/costum_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        android:text="01-Mar-20" />
 
-    <TextView
-        android:id="@+id/bodyText"
-        android:layout_width="125dp"
-        android:layout_height="41dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/idText"
-        app:layout_constraintTop_toTopOf="parent" />
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/costum_date"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:columnCount="2"
+        android:rowCount="2">
 
-    <TextView
-        android:id="@+id/idText"
-        android:layout_width="122dp"
-        android:layout_height="42dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bodyText"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/titleText"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/costum_type_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_rowSpan="2"
+            android:layout_margin="5dp"
+            android:foregroundGravity="center"
+            app:srcCompat="@drawable/ic_piggy" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/type_of"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="Expenses"
+            android:textAlignment="center"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="2000$"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+    </GridLayout>
+
+
+</RelativeLayout>
