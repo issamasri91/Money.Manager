@@ -10,19 +10,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.issamelasri.moneymanager.R;
+import com.issamelasri.moneymanager.databinding.ActivityAddBinding;
 import com.issamelasri.moneymanager.ui.pojo.PostModel;
 
 import java.util.Objects;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class AddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -31,24 +28,17 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
     public final String DATE_USER = "dateUser";
     public final String TYPE_USER = "typeUser";
     public final String AMOUNT_USER = "amountUser";
-    @BindView(R.id.et_amount)
-    EditText etAmount;
-    @BindView(R.id.et_date)
-    EditText etDate;
-    @BindView(R.id.et_type)
-    EditText etType;
-    @BindView(R.id.imageView4)
-    ImageView imageView4;
-    @BindView(R.id.save_button)
     Button saveButton;
     SharedPreferences sp;
     SharedPreferences.Editor editor;
+    private ActivityAddBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
-        ButterKnife.bind(this);
+        binding = ActivityAddBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         getSupportActionBar();
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sp.edit();
@@ -56,9 +46,9 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
-                    String date = etDate.getText().toString();
-                    String type = etType.getText().toString();
-                    int amount = Integer.parseInt(etAmount.getText().toString());
+                    String date = binding.etDate.getText().toString();
+                    String type = binding.etType.getText().toString();
+                    int amount = Integer.parseInt(binding.etAmount.getText().toString());
                     saveData();
                     PostModel postModel = new PostModel(date, amount, type);
                     Intent intent = new Intent();
@@ -71,9 +61,9 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
     }
 
     public void saveData() {
-        String date = etDate.getText().toString();
-        String type = etType.getText().toString();
-        int amount = Integer.parseInt(etAmount.getText().toString());
+        String date = binding.etDate.getText().toString();
+        String type = binding.etType.getText().toString();
+        int amount = Integer.parseInt(binding.etAmount.getText().toString());
         editor.putString(DATE_USER, date);
         editor.putString(TYPE_USER, type);
         editor.putInt(AMOUNT_USER, amount);
@@ -98,14 +88,14 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
 
     private boolean validateFields() {
         int yourDesiredLength = 1;
-        if (Objects.requireNonNull(etDate.getText()).length() < yourDesiredLength) {
-            etDate.setError("Your Input is Invalid");
+        if (Objects.requireNonNull(binding.etDate.getText()).length() < yourDesiredLength) {
+            binding.etDate.setError("Your Input is Invalid");
             return false;
-        } else if (Objects.requireNonNull(etAmount.getText()).length() < yourDesiredLength) {
-            etAmount.setError("Your Input is Invalid");
+        } else if (Objects.requireNonNull(binding.etAmount.getText()).length() < yourDesiredLength) {
+            binding.etAmount.setError("Your Input is Invalid");
             return false;
-        } else if (Objects.requireNonNull(etType.getText()).length() < yourDesiredLength) {
-            etType.setError("Your Input is Invalid");
+        } else if (Objects.requireNonNull(binding.etType.getText()).length() < yourDesiredLength) {
+            binding.etType.setError("Your Input is Invalid");
             return false;
         }
         {
